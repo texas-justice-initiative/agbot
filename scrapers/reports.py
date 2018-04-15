@@ -2,10 +2,11 @@ from datetime import date, datetime, timedelta
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from urllib.request import urlopen
 import json
 import re
 import smtplib
+
+import requests
 
 
 class Reports:
@@ -27,9 +28,9 @@ class Reports:
             'subject': 'agofficebot: New Release: Injuries or Death of Peace Officer',
         }
 
-        r = urlopen(url)
-        if r.status == 200:
-            contents = r.read().decode()
+        r = requests.get(url)
+        if r.status_code == 200:
+            contents = r.text
             if not contents:
                 raise Exception('The page is empty')
         else:
@@ -45,12 +46,12 @@ class Reports:
             for entry in files:
                 publish_date = datetime.strptime(entry['edor_date'], '%Y-%m-%d').date()
                 if publish_date == date.today() - timedelta(1):
-                    r = urlopen(entry['file'])
+                    r = requests.get(entry['file'])
 
-                    if r.status == 200:
+                    if r.status_code == 200:
                         attachment = {
                             'name': entry['file'].split('/')[-1],
-                            'content': r.read(),
+                            'content': r.text,
                         }
                     else:
                         print('Failed to download the attachment:', entry['file'])
@@ -95,7 +96,6 @@ class Reports:
             smtp.login(self.email_from, self.gmail_password)
             smtp.sendmail(self.email_from, send_to, msg.as_string())
             smtp.close()
-            print('Successfully sent the email')
         except Exception:
             print(f'Failed to send the email')
             raise
