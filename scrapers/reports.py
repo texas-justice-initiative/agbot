@@ -62,8 +62,7 @@ class Reports:
                     File: {entry['file']}
                     '''
 
-                    self.send_email(subject=report_type['subject'],
-                                    text=text, attachment=attachment)
+                    self.send_email(subject=report_type['subject'], text=text, attachment=attachment)
 
     # noinspection PyMethodMayBeStatic
     def pull_reports_metadata(self, pattern, contents):
@@ -84,7 +83,7 @@ class Reports:
         msg.attach(MIMEText(text))
 
         msg.attach(MIMEApplication(
-            attachment,
+            attachment['content'],
             Content_Disposition=f'attachment; filename="{attachment["name"]}"',
             Name=attachment['name']
         ))
