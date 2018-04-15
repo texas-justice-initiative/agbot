@@ -13,7 +13,7 @@ EMAIL = {
 GSHEETS = {
     # json generated during service account key creation
     # https://console.developers.google.com/apis/credentials
-    # The 'client_email' must be granted 'edit' rights
+    # The 'client_email' must be granted 'edit' rights in the Google sheet
     'auth_params': {
         'type': 'service_account',
         'project_id': '',
