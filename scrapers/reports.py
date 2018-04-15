@@ -96,5 +96,5 @@ class Reports:
             smtp.sendmail(self.email_from, send_to, msg.as_string())
             smtp.close()
         except Exception:
-            print(f'Failed to send the email')
+            print(f'Failed to send the email for:\n{text}')
             raise
