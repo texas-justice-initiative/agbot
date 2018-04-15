@@ -6,7 +6,8 @@ build: clean
 	mkdir -p ${TMP_DIRECTORY}
 	rsync -R "${PYTHON_SOURCES}" ${TMP_DIRECTORY}
 	pip3 install -r requirements.txt -t ${TMP_DIRECTORY}
-	zip -r ${LAMBDA_DEPLOYMENT_PACKAGE} ${TMP_DIRECTORY} -i '*.py' '*.pem'
+	cd ${TMP_DIRECTORY} && zip -r tmp.zip . -i '*.py' '*.pem'
+	mv ${TMP_DIRECTORY}/tmp.zip ${LAMBDA_DEPLOYMENT_PACKAGE}
 	rm -r ${TMP_DIRECTORY}
 
 clean:
