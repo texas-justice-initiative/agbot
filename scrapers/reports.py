@@ -31,10 +31,9 @@ class Reports:
         r = requests.get(url)
         if r.status_code == 200:
             contents = r.text
-            if not contents:
-                raise Exception('The page is empty')
         else:
-            raise Exception(f'Failed to download from the page: Error {r.status}')
+            print(f'Failed to download from {url}')
+            r.raise_for_status()
 
         for report_type in [poid_type, oid_type]:
             try:
