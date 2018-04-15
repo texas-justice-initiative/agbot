@@ -1,4 +1,6 @@
 from scrapers.reports import Reports
+from utils.datadotworld import Datadotworld
+from utils.gsheets import Gsheets
 import settings
 
 
