@@ -10,6 +10,10 @@ EMAIL = {
     'gmail_password': 'SUPER_DUPER_SECRET',
 }
 
+GMAPS = {
+    'api_key': 'GOOGLE_MAPS_API_KEY',
+}
+
 GSHEETS = {
     # json generated during service account key creation
     # https://console.developers.google.com/apis/credentials

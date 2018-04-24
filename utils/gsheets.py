@@ -16,6 +16,7 @@ class Gsheets:
             'majorDimension': 'ROWS',
             'values': [rows],
         }
+
         self.service.spreadsheets().values().append(
             spreadsheetId=self.sheet_id, range=sheet_range, body=body, valueInputOption='USER_ENTERED'
         ).execute()
