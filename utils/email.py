@@ -6,9 +6,9 @@ import smtplib
 
 class Email:
     def __init__(self, settings):
-        self.email_from = email_settings['from']
-        self.email_to = email_settings['to']
-        self.gmail_password = email_settings['gmail_password']
+        self.email_from = settings['from']
+        self.email_to = settings['to']
+        self.gmail_password = settings['gmail_password']
 
     def send(self, subject, text, attachment):
         send_to = ','.join(self.email_to)

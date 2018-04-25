@@ -57,11 +57,12 @@ class Reports:
                     File: {entry['file']}
                     '''
 
-                    reports.append(dict(
-                        subject=report_type['subject'],
-                        text=text,
-                        attachment=attachment
-                    ))
+                    reports.append({
+                        'subject': report_type['subject'],
+                        'text': text,
+                        'attachment': attachment,
+                        'filename': entry['file'],
+                    })
         return reports
 
     # noinspection PyMethodMayBeStatic
