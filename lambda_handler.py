@@ -1,11 +1,18 @@
 from scrapers.reports import Reports
-from utils.datadotworld import Datadotworld
-from utils.gsheets import Gsheets
+from utils.email import Email
 import settings
 
 
 def handle(event, context):
-    reports = Reports(email_settings=settings.EMAIL)
-    reports.scrape()
+    reports_scraper = Reports()
+    email = Email(settings=settings.EMAIL)
+
+    print('Scraping reports')
+    reports = reports_scraper.scrape()
+    print('Found:', [r['filename'] for r in reports])
+
+    print('Sending emails to', email.email_to)
+    for report in reports:
+        email.send(report['subject'], report['text'], report['attachment'])
 
     print('Done!')

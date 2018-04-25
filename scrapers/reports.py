@@ -1,19 +1,13 @@
 from datetime import date, datetime, timedelta
-from email.mime.application import MIMEApplication
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import json
 import re
-import smtplib
 
 import requests
 
 
 class Reports:
-    def __init__(self, email_settings):
-        self.email_from = email_settings['from']
-        self.email_to = email_settings['to']
-        self.gmail_password = email_settings['gmail_password']
+    def __init__(self):
+        pass
 
     def scrape(self):
         url = 'https://www.texasattorneygeneral.gov/cj/peace-officer-involved-shooting-report'
@@ -35,6 +29,7 @@ class Reports:
             print(f'Failed to download from {url}')
             r.raise_for_status()
 
+        reports = []
         for report_type in [poid_type, oid_type]:
             try:
                 files = self.pull_reports_metadata(report_type['pattern'], contents)
@@ -62,7 +57,13 @@ class Reports:
                     File: {entry['file']}
                     '''
 
-                    self.send_email(subject=report_type['subject'], text=text, attachment=attachment)
+                    reports.append({
+                        'subject': report_type['subject'],
+                        'text': text,
+                        'attachment': attachment,
+                        'filename': entry['file'],
+                    })
+        return reports
 
     # noinspection PyMethodMayBeStatic
     def pull_reports_metadata(self, pattern, contents):
@@ -70,31 +71,3 @@ class Reports:
         json_content = match.group(1) + ']'
         json_content = json_content.replace("'", '"').replace('\\\\"', "'")
         return json.loads(json_content)
-
-    def send_email(self, subject, text, attachment):
-        send_to = ','.join(self.email_to)
-
-        msg = MIMEMultipart()
-        msg['Subject'] = subject
-        msg['From'] = self.email_from
-        msg['To'] = send_to
-        msg.preamble = subject
-
-        msg.attach(MIMEText(text))
-
-        msg.attach(MIMEApplication(
-            attachment['content'],
-            Content_Disposition=f'attachment; filename="{attachment["name"]}"',
-            Name=attachment['name']
-        ))
-
-        try:
-            smtp = smtplib.SMTP('smtp.gmail.com', 587)
-            smtp.ehlo()
-            smtp.starttls()
-            smtp.login(self.email_from, self.gmail_password)
-            smtp.sendmail(self.email_from, send_to, msg.as_string())
-            smtp.close()
-        except Exception:
-            print(f'Failed to send the email for:\n{text}')
-            raise

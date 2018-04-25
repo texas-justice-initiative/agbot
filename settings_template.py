@@ -1,8 +1,3 @@
-DATADOTWORLD = {
-    'api_key': 'MY_SECRET_KEY',
-    'dataset_slug': 'OWNER/DATASET',
-}
-
 # Emails must be sent from a gmail account
 EMAIL = {
     'from': 'EMAIL_FROM@gmail.com',
