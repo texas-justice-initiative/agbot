@@ -18,6 +18,11 @@ class Gmaps:
             print(f'Failed to geocode {address}')
             r.raise_for_status()
 
-        coordinates = r.json()['results'][0]['geometry']['location']
+        lat = lng = ''
+        try:
+            coordinates = r.json()['results'][0]['geometry']['location']
+            lat, lng = coordinates['lat'], coordinates['lng']
+        except:
+            pass
 
-        return coordinates['lat'], coordinates['lng']
+        return lat, lng
