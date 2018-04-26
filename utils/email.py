@@ -32,7 +32,7 @@ class Email:
             smtp.ehlo()
             smtp.starttls()
             smtp.login(self.email_from, self.gmail_password)
-            smtp.sendmail(self.email_from, send_to, msg.as_string())
+            smtp.sendmail(self.email_from, self.email_to, msg.as_string())
             smtp.close()
         except Exception:
             print(f'Failed to send the email for:\n{text}')
