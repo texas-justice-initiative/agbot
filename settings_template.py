@@ -1,3 +1,8 @@
+DOCUMENT_CLOUD = {
+    'email': 'EMAIL_ADDRESS',
+    'password': 'SUPER_SECURE_PASSWORD',
+}
+
 # Emails must be sent from a gmail account
 EMAIL = {
     'from': 'EMAIL_FROM@gmail.com',
