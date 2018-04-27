@@ -10,11 +10,11 @@ class Gsheets:
             .with_scopes(['https://www.googleapis.com/auth/spreadsheets'])
         self.service = discovery.build('sheets', 'v4', credentials=credentials)
 
-    def append(self, sheet_range, rows):
+    def append(self, sheet_range, values):
         body = {
             'range': sheet_range,
             'majorDimension': 'ROWS',
-            'values': [rows],
+            'values': values,
         }
 
         self.service.spreadsheets().values().append(
