@@ -10,6 +10,15 @@ class DocumentCloud:
     # 'project_id' can be gotten by running list_projects()
     # 'source' is optional
     def upload(self, title, file_url, project_id, source=None, access='public'):
+        """
+        Uploads a new document to DocumentCloud.
+
+        :param str title: Name of the document
+        :param str file_url: URL where the file will be downloaded from
+        :param str project_id: Project to upload the document to
+        :param str source: Source of the document (optional)
+        :param str access: Visibility of the document (default='public')
+        """
         url = f'{BASE_URL}/upload.json'
 
         body = {
@@ -27,6 +36,11 @@ class DocumentCloud:
             r.raise_for_status()
 
     def list_projects(self):
+        """
+        Lists the projects owned.
+
+        :return: A list of dictionaries with the keys: (id, title)
+        """
         url = f'{BASE_URL}/projects.json'
 
         r = requests.get(url, auth=self.auth)

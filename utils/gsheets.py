@@ -11,6 +11,12 @@ class Gsheets:
         self.service = discovery.build('sheets', 'v4', credentials=credentials)
 
     def append(self, sheet_range, values):
+        """
+        Appends new rows to a spreadsheet.
+
+        :param str sheet_range: Range of the spreadsheet; in A1 notation
+        :param list values: A list of lists, with each inner list being a row
+        """
         body = {
             'range': sheet_range,
             'majorDimension': 'ROWS',

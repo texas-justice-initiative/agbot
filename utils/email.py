@@ -11,6 +11,13 @@ class Email:
         self.gmail_password = settings['gmail_password']
 
     def send(self, subject, text, attachment):
+        """
+        Sends an email.
+
+        :param subject: Subject line of the email
+        :param text: Body of the message
+        :param attachment: A binary of the contents of the attachment
+        """
         send_to = ','.join(self.email_to)
 
         msg = MIMEMultipart()
