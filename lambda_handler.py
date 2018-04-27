@@ -9,7 +9,7 @@ def handle(event, context):
 
     print('Scraping reports')
     reports = reports_scraper.scrape()
-    print('Found:', [r['metadata']['file'] for r in reports])
+    print('Found:', [r['file_url'] for r in reports])
 
     print('Sending emails to', email.email_to)
     for report in reports:
