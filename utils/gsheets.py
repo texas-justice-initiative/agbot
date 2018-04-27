@@ -3,8 +3,8 @@ from googleapiclient import discovery
 
 
 class Gsheets:
-    def __init__(self, settings):
-        self.sheet_id = settings['sheet_id']
+    def __init__(self, settings, sheetid):
+        self.sheet_id = sheetid
 
         credentials = service_account.Credentials.from_service_account_info(settings['auth_params']) \
             .with_scopes(['https://www.googleapis.com/auth/spreadsheets'])
