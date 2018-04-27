@@ -21,10 +21,10 @@ def handle(event, context):
 
 def prep_email(report):
     text = f'''
-           Agency: {report['metadata']['agency']}
-           Report Date: {report['metadata']['dor']}
-           Release Date: {report['metadata']['edor_date']}
-           File: {report['metadata']['file']}
+           Agency: {report['agency']}
+           Report Date: {report['report_date']}
+           Release Date: {report['release_date']}
+           File: {report['file_url']}
            '''
 
-    return report['metadata']['type'], text, report['contents']
+    return report['type'], text, report['contents']

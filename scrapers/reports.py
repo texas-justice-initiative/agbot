@@ -50,9 +50,12 @@ class Reports:
                     else:
                         print('Failed to download the attachment:', entry['file'])
 
-                    entry['type'] = report_type['subject']
                     reports.append({
-                        'metadata': entry,
+                        'type': report_type['subject'],
+                        'agency': entry['agency'],
+                        'report_date': entry['dor'],
+                        'release_date': entry['edor_date'],
+                        'file_url': entry['file'],
                         'contents': attachment,
                     })
         return reports
