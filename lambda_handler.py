@@ -28,3 +28,8 @@ def prep_email(report):
            '''
 
     return report['type'], text, report['contents']
+
+
+# For local tests
+if __name__ == '__main__':
+    handle(0, 0)

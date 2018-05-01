@@ -1,18 +1,22 @@
+# Not used at this time, feel free to ignore
 DOCUMENT_CLOUD = {
     'email': 'EMAIL_ADDRESS',
     'password': 'SUPER_SECURE_PASSWORD',
 }
 
-# Emails must be sent from a gmail account
 EMAIL = {
-    'from': 'EMAIL_FROM@gmail.com',
-    'to': ['ADDRESS_1@gmail.com', 'ADDRESS_2@gmail.com'],
-    'gmail_password': 'SUPER_DUPER_SECRET',
+    'from': 'EMAIL_FROM@domain.com',
+    'to': ['ADDRESS_1@domain.com', 'ADDRESS_2@domain.com'],
+
+    'account_password': 'SUPER_DUPER_SECRET',
+    'server_address': 'smtp.mailgun.org',
+    'server_port': 587,
 }
 
 GSHEETS = {
-    # json generated during service account key creation
+    # Json generated during service account key creation:
     # https://console.developers.google.com/apis/credentials
+    #
     # In the Google sheet: share with the 'client_email' and grant 'edit' rights
     'auth_params': {
         'type': 'service_account',

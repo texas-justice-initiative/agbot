@@ -7,11 +7,11 @@ class DocumentCloud:
     def __init__(self, settings):
         self.auth = (settings['email'], settings['password'])
 
-    # 'project_id' can be gotten by running list_projects()
-    # 'source' is optional
     def upload(self, title, file_url, project_id, source=None, access='public'):
         """
         Uploads a new document to DocumentCloud.
+
+        Run list_projects() to get the project ids.
 
         :param str title: Name of the document
         :param str file_url: URL where the file will be downloaded from

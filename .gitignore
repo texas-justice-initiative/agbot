@@ -1,5 +1,6 @@
 settings.py
 *.iml
 
+__pycache__
 .idea
 build

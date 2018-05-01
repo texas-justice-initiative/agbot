@@ -8,7 +8,10 @@ class Email:
     def __init__(self, settings):
         self.email_from = settings['from']
         self.email_to = settings['to']
-        self.gmail_password = settings['gmail_password']
+
+        self.account_password = settings['account_password']
+        self.server_address = settings['server_address']
+        self.server_port = settings['server_port']
 
     def send(self, subject, text, attachment):
         """
@@ -35,10 +38,10 @@ class Email:
         ))
 
         try:
-            smtp = smtplib.SMTP('smtp.gmail.com', 587)
+            smtp = smtplib.SMTP(self.server_address, self.server_port)
             smtp.ehlo()
             smtp.starttls()
-            smtp.login(self.email_from, self.gmail_password)
+            smtp.login(self.email_from, self.account_password)
             smtp.sendmail(self.email_from, self.email_to, msg.as_string())
             smtp.close()
         except Exception:
